@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.common.Page;
+import com.dao.TransferRecordDao;
 import com.entity.TransferRecord;
 import com.service.TransferRecordService;
 
@@ -22,6 +23,8 @@ public class TransactionRecordServiceTest {
 	
 	@Autowired
 	private TransferRecordService transactionRecordService;
+	@Autowired
+	private TransferRecordDao transferRecordDao;
 
 	private static final Logger logger = Logger.getLogger(TransactionRecordServiceTest.class);
 
@@ -73,6 +76,16 @@ public class TransactionRecordServiceTest {
 	public void testDelete(){
 		TransferRecord entity = this.transactionRecordService.getTransfer(4250);
 		this.transactionRecordService.deleteTransfer(entity);
+	}
+	
+	@Test
+	public void testFindWithCondition(){
+		List<TransferRecord> list = this.transferRecordDao.findWithCondition();
+		for(TransferRecord t:list){
+			logger.info(t.getId()+"  "+t.getDestinationAddress()+"  "+t.getTransferType()+"  "
+					+t.getTransferAmount()+"  "+t.getTransferState()+"  "+
+					t.getTransferDate()+"  "+t.getTransferAddress());
+		}
 	}
 	
 	

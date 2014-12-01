@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,6 +61,45 @@ public class TransferRecordService {
 		User user = this.userDao.get(userId);
 		transfer.setUser(user);
 		this.transactionRecordDao.addTransferRecord(transfer);
+	}
+	
+	@Scheduled(fixedDelay=60000)
+	public void executeTransfer(){
+		
+		List<TransferRecord> list =this.transactionRecordDao.findWithCondition();
+		if(list == null)
+			return ;
+
+		TransferRecord newTransferRecord;
+		User desUser;
+		Wallet desWallet;
+		for(TransferRecord t : list){
+			//根据目标地址，获取目标钱包
+			desWallet = this.walletDao.get(t.getDestinationAddress());
+			//根据目标地址，获取目标User
+			desUser =desWallet.getUser();
+			//添加新的交易记录
+			newTransferRecord = new TransferRecord();
+			newTransferRecord.setDestinationAddress(t.getTransferAddress());
+			newTransferRecord.setTransferAddress(t.getDestinationAddress());
+			newTransferRecord.setTransferAmount(t.getTransferAmount());
+			newTransferRecord.setTransferType("汇入");
+			newTransferRecord.setTransferState("完成");
+			newTransferRecord.setTransferDate(new Date());
+			newTransferRecord.setUser(desUser);
+			this.transactionRecordDao.save(newTransferRecord);
+			//目标钱包增加金额
+			double totalAmount  = desWallet.getAmount()+t.getTransferAmount();
+			desWallet.setAmount(totalAmount);
+			this.walletDao.saveOrUpdate(desWallet);
+			//将原来的交易状态改为完成
+			t.setTransferState("完成");
+			this.transactionRecordDao.saveOrUpdate(t);
+		}
+		System.out.println("------------------------------------");
+		System.out.println("--------------调度完成-----------------");
+		System.out.println("------------------------------------");
+		
 	}
 	
 	public TransferRecord getTransfer(int id){
