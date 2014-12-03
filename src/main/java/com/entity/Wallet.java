@@ -31,7 +31,7 @@ public class Wallet {
 		this.address = address;
 	}
 
-	@Column(name="amount")
+	@Column(name="amount",precision=8)
 	public double getAmount() {
 		return amount;
 	}

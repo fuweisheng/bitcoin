@@ -109,4 +109,10 @@ public class UserService {
 		return false;
 	}
 
+	//退出，清空Session的内容
+	public void logout(){
+		ServletActionContext.getContext().getSession().put("email", null);
+		ServletActionContext.getContext().getSession().put("id",null);
+		ServletActionContext.getContext().getSession().put("state",null);
+	}
 }

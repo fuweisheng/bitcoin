@@ -170,8 +170,22 @@ re = /^0.[1-9][0-9]*$|^[1-9][0-9]*.[0-9]+$|^[1-9][0-9]*$/;
 $(document).ready(function(){
 	//响应转账地址回显信息
 	$("#id_destinationAddress").change(function() {
-		  $("#id_name").val("傅伟生");
-		//ajax
+		var xmlhttp;
+		var addr = $("#id_destinationAddress").val();
+		if (window.XMLHttpRequest){
+			 // code for IE7+, Firefox, Chrome, Opera, Safari
+		 	 xmlhttp=new XMLHttpRequest();
+		}else{
+			// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange=function(){
+			if (xmlhttp.readyState==4 && xmlhttp.status==200){
+				$("#id_name").val(xmlhttp.responseText);
+			}
+		}
+		xmlhttp.open("get","/bitcoin/wallet/getname?address="+addr,true);
+		xmlhttp.send();
 	});
 	
 	//检查转账数目

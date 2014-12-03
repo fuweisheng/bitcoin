@@ -89,6 +89,14 @@ public class UserAction extends ActionSupport {
 		this.setTip("账号或密码错误!");
 		return "fail";
 	}
+	
+	// 登录的Action
+	@Action(value = "logout", results = {@Result(name = "success", type = "redirect", location = "/user/login.jsp")})
+	public String logout() throws Exception {
+		this.userService.logout();
+		return SUCCESS;
+	}
+
 
 	public User getUser() {
 		return user;

@@ -66,6 +66,13 @@ public class WalletService {
 		this.walletDao.addWallet(wallet);
 	}
 	
+	public String getName(String address){
+		Wallet  wallet = this.walletDao.get(address);
+		if(wallet == null)
+			return "";
+		return wallet.getUser().getName();
+	}
+	
 	public void deleteWallet(String address){
 		Wallet wallet = this.walletDao.get(address);
 		if(wallet == null)

@@ -64,7 +64,7 @@ public class TransferRecord {
 		this.transferType = transferType;
 	}
 
-	@Column(name = "transfer_amount")
+	@Column(name = "transfer_amount",precision=8)
 	public double getTransferAmount() {
 		return transferAmount;
 	}

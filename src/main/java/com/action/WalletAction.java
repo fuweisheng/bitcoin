@@ -2,6 +2,8 @@ package com.action;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
@@ -12,6 +14,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.stereotype.Controller;
 
 import com.common.Page;
@@ -106,6 +109,18 @@ public class WalletAction extends ActionSupport {
 		int userId = (Integer) ServletActionContext.getContext().getSession().get("id");
 		this.walletService.addWallet(userId);
 		return SUCCESS;
+	}
+	
+	// 增加钱包
+	@Action(value = "getname")
+	public void getname() throws Exception {
+		logger.info(this.address);
+		String name = this.walletService.getName(this.address);
+		logger.info(name);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/plain;charset=UTF-8");
+		response.getWriter().write(name);
+//		return null;
 	}
 
 	public List getList() {
