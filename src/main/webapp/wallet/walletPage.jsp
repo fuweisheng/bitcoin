@@ -19,56 +19,61 @@
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 
 	<div class="row">
-		<div class="col-md-10">
+		<div class="col-md-8">
 			<div style="width: 600px; margin-left: 150px;">
 
 				<h2>Wallet Address List</h2>
 			</div>
+			<div class="col-md-10 col-md-offset-1">
+			<h3>我的钱包地址列表</h3>
+			<form id="id_searchForm" action="/bitcoin/wallet/walletpage" method="post">
+			<table id="main" class="table table-striped">
+				<thead>
+					<tr>
+					<th>Address</th>
+					<th>amout</th>
+					<th>locket</th>
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach items="${list}" var="wallet" >
+				  <tr>
+				    <td><c:out value="${wallet.address}"/></td>
+				    <td><c:out value="${wallet.amount}"/></td>
+				    <td><c:out value="${wallet.locked}"/></td>
+				  </tr>
+				 </c:forEach>
+				</tbody>
+			</table>
+	
+		   <div>
+		   <input type="hidden" name="page.currentPage"/>
+		   <input type="hidden" name="page.direction"/>
+			<ul class="pager">
+	    	  <li><a id="id_previousPage" href="#">上一页</a></li>
+	    	  <li>当前第<span id="id_currentPage"><c:out value="${page.currentPage}"/></span>页</li>
+	    	  <li>总共<span><c:out value="${page.totalPage}"/></span>页</li>
+	    	  <li><a id="id_nextPage" href="#">下一页</a></li>
+	  		</ul>
+	  	   </div>
+	  	 </form>
 		</div>
-		<div class="col-md-2">
+		</div>
+		<div class="col-md-4">
 			<br>
 			
 			<a href="/bitcoin/wallet/addwallet" class="btn btn-default btn-sm active">新建钱包</a>
 			
 			<a href="/bitcoin/wallet/walletlist" class="btn btn-default btn-sm active">付款</a>
-			
+			<br />
+			<br />
+			<br />
+			<br />
+			<img class="img-thumbnail img-responsive" alt="图片5" src="../images/5.jpg" />
 		</div>
 
 	</div>
-	<div class="col-md-10 col-md-offset-1">
-		<h3>我的钱包地址列表</h3>
-		<form id="id_searchForm" action="/bitcoin/wallet/walletpage" method="post">
-		<table id="main" class="table table-striped">
-			<thead>
-				<tr>
-				<th>Address</th>
-				<th>amout</th>
-				<th>locket</th>
-				</tr>
-			</thead>
-			<tbody>
-			<c:forEach items="${list}" var="wallet" >
-			  <tr>
-			    <td><c:out value="${wallet.address}"/></td>
-			    <td><c:out value="${wallet.amount}"/></td>
-			    <td><c:out value="${wallet.locked}"/></td>
-			  </tr>
-			 </c:forEach>
-			</tbody>
-		</table>
-
-	   <div>
-	   <input type="hidden" name="page.currentPage"/>
-	   <input type="hidden" name="page.direction"/>
-		<ul class="pager">
-    	  <li><a id="id_previousPage" href="#">上一页</a></li>
-    	  <li>当前第<span id="id_currentPage"><c:out value="${page.currentPage}"/></span>页</li>
-    	  <li>总共<span><c:out value="${page.totalPage}"/></span>页</li>
-    	  <li><a id="id_nextPage" href="#">下一页</a></li>
-  		</ul>
-  	   </div>
-  	 </form>
-	</div>
+	
 
 	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
