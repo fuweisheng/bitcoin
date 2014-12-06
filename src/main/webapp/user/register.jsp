@@ -17,7 +17,6 @@
 <style type="text/css">
 .row {
 	background-color: #EFEFEF;
-	padding-left: 200px;
 }
 </style>
 </head>
@@ -131,9 +130,8 @@
 	<jsp:include page="../common/head.jsp" />
 
 	<div class="row">
-
-		<div class="col-xs-1"></div>
-		<div class=" col-xs-6" style="min-width: 500px;">
+		<div class="col-md-2"></div>
+		<div class=" col-md-6" style="min-width: 500px;">
 			<h3>Create A New Wallet.</h3>
 			<br>
 			<h4>Please choose an alias and password for the new wallet.</h4>
@@ -189,6 +187,11 @@
 				</div>
 			</form>
 		</div>
+		<div class="col-md-4">
+		<br/><br/><br/><br/><br/><br/><br/>
+		<img class="img-responsive img-rounded" alt="图片7" src="../images/7.jpg" />
+		</div>
 	</div>
+
 </body>
 </html>

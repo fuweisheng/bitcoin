@@ -13,19 +13,74 @@
 	
 	
 	<title>欢迎访问</title>
-	
+<style type="text/css">
+.banner { position: relative; overflow: auto; }
+.banner li { list-style: none; }
+.banner ul li { float: left; }
+img {
+	width: 100%;
+	height:500px;
+}
+
+#id_pre {
+position: absolute;
+top :50%;
+left:30px;
+z-index: 2;
+}
+#id_next {
+position: absolute;
+top:50%;
+right:10px;
+z-index: 2;
+}
+
+</style>
 </head>
 <body>
-	<jsp:include page="../common/head.jsp" />
+	<div class="navbar navbar-inverse" ><p class="navbar-text navbar-left"><span style="font-size: 18px;">YUN - Cloud Coin</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/bitcoin/user/login.jsp" class="navbar-link">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="navbar-link">Wallet</a>&nbsp;&nbsp;&nbsp;&nbsp;Stats&nbsp;&nbsp;&nbsp;&nbsp;API&nbsp;&nbsp;&nbsp;&nbsp;矿机</p>
+	<p class="navbar-text navbar-right" style="margin-right: 20px;">Signed in as <span id="id_emailName"></span> <a href="/bitcoin/user/logout" class="navbar-link">logout</a></p></div>
 
+	<div class="banner row" style="margin-top:-20px; ">
+		<span id="id_pre"><a href="#" class="unslider-arrow prev">Previous slide</a></span>
+		<span id="id_next"><a href="#" class="unslider-arrow next">Next slide</a></span>
+		<ul class="col-md-12">
+			<li><img alt="" src="../images/1.jpg"></li>
+			<li><img alt="" src="../images/2.jpg"></li>
+			<li><img alt="" src="../images/3.jpg"></li>
+			<li><img alt="" src="../images/4.jpg"></li>
+		</ul>
+	</div>
+	
 
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed-->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	 
+	<script src="//code.jquery.com/jquery-latest.min.js"></script>
+	<script src="//unslider.com/unslider.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('.banner').unslider({
+			speed: 500,               //  The speed to animate each slide (in milliseconds)
+			delay: 3000,              //  The delay between slide animations (in milliseconds)
+			complete: function() {},  //  A function that gets called after every slide animation
+			keys: true,               //  Enable keyboard (left, right) arrow shortcuts
+			dots: true,               //  Display dot navigation
+			fluid: true              //  Support responsive design. May break non-responsive designs
+		});
+	    
+	    var unslider = $('.banner').unslider();
 
-
-
-
-	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	    $('.unslider-arrow').click(function() {
+	        var fn = this.className.split(' ')[1];
+			
+	        //  Either do unslider.data('unslider').next() or .prev() depending on the className
+	        unslider.data('unslider')[fn]();
+	    });
+	});
+		
+	</script>
 </body>
 </html>
