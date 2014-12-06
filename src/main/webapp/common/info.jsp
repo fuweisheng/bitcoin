@@ -17,7 +17,7 @@
 <body style="background-image: url(../images/bg.jpg)">
 	<jsp:include page="../common/head.jsp" />
 <div class="container-fluid" >
-	<div id="id_error" class="alert alert-info" style="display: block; height:150px;padding-top:50px;padding-left:100px;">
+	<div id="id_error" class="alert alert-info" style="display: none; height:150px;padding-top:50px;padding-left:100px;">
 		<div>ERROR!</div>
 		<div>WARNING:注册失败，你输入的账号已被占用！<a href="../user/register.jsp">点击返回</a></div>
 	</div>
