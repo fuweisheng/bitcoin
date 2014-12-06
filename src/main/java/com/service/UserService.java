@@ -24,11 +24,7 @@ public class UserService {
 	
 	//增加用户的事务
 	//同时要将邮箱验证码存入Validate中id是自动生成的
-	public boolean addUser(User user){
-		
-		if(this.isExistedEmail(user.getEmail())){
-			return false;
-		}
+	public void addUser(User user){
 		
 		Validate validate = new Validate();
 		String vcode = VCodeUtils.Vcode(6);
@@ -36,28 +32,6 @@ public class UserService {
 		validate.setState(0);
 		validate.setRegisterDate(new Date());
 		//发送邮件
-		this.sendEmail(user, vcode);
-		//validate关联User
-		validate.setUser(user);
-		//提取密码加密
-		String pwd = user.getPassword();
-		user.setPassword(Md5Utils.md5(pwd));
-		user.setValidate(validate);
-		this.userDao.save(user);
-		
-		return true;
-	}
-	
-	public boolean isExistedEmail(String email){
-		Integer id = this.userDao.getId(email);
-		if(id == null)
-			return false;
-		return true;
-	}
-	
-	public void sendEmail(User user,String vcode){
-		
-		
 		MailUtils mailUtils = new MailUtils();
 		mailUtils.setFromMail("傅伟生");
 		mailUtils.setUsername("juanornot@126.com");
@@ -74,6 +48,12 @@ public class UserService {
 		text.append("<P>到注册表格中。</P>");
 		mailUtils.sendMailUtis(user.getEmail(), subject, text.toString());
 		
+		validate.setUser(user);
+		//提取密码加密
+		String pwd = user.getPassword();
+		user.setPassword(Md5Utils.md5(pwd));
+		user.setValidate(validate);
+		this.userDao.save(user);
 	}
 	
 	//删除用户的事务

@@ -27,5 +27,4 @@
 		<servlet-name>VCodeServlet</servlet-name>
 		<url-pattern>/images/vcode.jpg</url-pattern>
 	</servlet-mapping>
-	
 </web-app>

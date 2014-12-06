@@ -15,9 +15,8 @@
 </head>
 <body>
 	<jsp:include page="../common/head.jsp" />
-	<div class="col-md-1"></div>
-<div class="col-md-6">
-<div  style="min-width:500px;">
+	
+<div class="container" style="min-width:500px;padding-right:200px;">
 	<h2>My Transactions List</h2>
 	<h4>我的交易列表</h4>
 	<form id="id_pageForm" action="/bitcoin/wallet/transaction" method="post">
@@ -86,13 +85,7 @@
   	</div>
   	</form>
 </div>
-</div>
-<div class="col-md-1">
-</div>
-<div class="col-md-4">
-<br /><br /><br /><br /><br />
-<img  class="img-responsive img-circle" alt="图片6" src="../images/6.jpg" />
-</div>
+
 
 
 

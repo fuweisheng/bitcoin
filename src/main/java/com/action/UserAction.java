@@ -48,14 +48,9 @@ public class UserAction extends ActionSupport {
 			this.setTip("验证码错误!");
 			return "errVCode";
 		}
-		if(this.userService.addUser(this.user)){
-			this.setTip("success");
-			return SUCCESS;
-		}else{
-			this.setTip("error");
-			return SUCCESS;
-		}
-		
+		this.userService.addUser(this.user);
+		this.setTip("success");
+		return SUCCESS;
 	}
 
 	// 验证的Action
