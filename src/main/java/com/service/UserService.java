@@ -22,6 +22,9 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
+	@Autowired
+	MailUtils mailUtils;
+	
 	//增加用户的事务
 	//同时要将邮箱验证码存入Validate中id是自动生成的
 	public boolean addUser(User user){
@@ -62,13 +65,6 @@ public class UserService {
 	
 	public void sendEmail(User user,String vcode){
 		
-		
-		MailUtils mailUtils = new MailUtils();
-		mailUtils.setFromMail("傅伟生");
-		mailUtils.setUsername("juanornot@126.com");
-		mailUtils.setPassword("6635660ws,");
-		mailUtils.setSmtpHost("smtp.126.com");
-		mailUtils.setVurl("/bitcoin/user/login.jsp");
 		String subject = "云币钱包注册验证";
 		StringBuffer text = new StringBuffer("");
 		text.append("<p><h2>你的云币账户已准备就绪！</h2></p>");
@@ -129,6 +125,8 @@ public class UserService {
 			user.getValidate().setState(1);
 			user.setName(name);
 			this.userDao.saveOrUpdate(user);
+			//设置验证状态为“1”，表示已验证
+			ServletActionContext.getContext().getSession().put("state",1);
 			return true;
 		}
 		return false;

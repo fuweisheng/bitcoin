@@ -88,6 +88,26 @@
 			<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+	<!-- 邮件发送 -->
+	<bean id="mailUtils" class="com.utils.MailUtils">
+		<property name="fromMail">
+			<value>juanornot@126.com</value>
+		</property>
+		<property name="smtpHost">
+			<value>smtp.126.com</value>
+		</property>
+		<property name="username">
+			<value>juanornot@126.com</value>
+		</property>
+		<property name="password">
+			<value>6635660ws,</value>
+		</property>
+		<property name="vurl">
+			<value>http://127.0.0.1:8080/bitcoin/user/login.jsp</value>
+		</property>
+	</bean>
+	
 	<!-- Spring 调度 -->
 	<task:annotation-driven />
+	
 </beans>

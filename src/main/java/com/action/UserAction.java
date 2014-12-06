@@ -22,11 +22,11 @@ public class UserAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(UserAction.class);
 
-	private User user; // 用于注册的页面,仅供参考,一切按你们的实际需求设计
-	private String captcha; // 用于登录和注册的页面,仅供参考,一切按你们的实际需求设计
-	private String email; // 用于登录的页面,仅供参考,一切按你们的实际需求设计
-	private String password; // 用于登录的页面,仅供参考,一切按你们的实际需求设计
-	private String name; // 用于验证的页面,仅供参考,一切按你们的实际需求设计
+	private User user; // 用于注册的页面
+	private String captcha; // 用于登录和注册的页面
+	private String email; // 用于登录的页面
+	private String password; // 用于登录的页面
+	private String name; // 用于验证的页面
 	private String tip; // 用于页面的提示
 
 	@Autowired
@@ -60,12 +60,13 @@ public class UserAction extends ActionSupport {
 
 	// 验证的Action
 	@Action(value = "check", results = {
-			@Result(name = "success", location = "/user/login.jsp"),
+			@Result(name = "success",type="redirect",location = "/wallet/walletpage"),
 			@Result(name = "fail", location = "/user/check.jsp") })
 	public String check() throws Exception {
 		logger.info(this.name);
 		logger.info(this.captcha);
 		if (this.userService.check(this.name, this.captcha)) {
+			this.setTip("成功!");
 			return SUCCESS;
 		}
 		this.setTip("验证码有误!");

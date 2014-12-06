@@ -1,6 +1,5 @@
 package com.service.test;
 
-
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,31 +8,23 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.entity.User;
+import com.service.PriceService;
 import com.service.UserService;
-import com.utils.VCodeUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:applicationContext.xml" })
-public class UserServiceTest {
+public class PriceServiceTest {
 	
-	private static final Logger logger = Logger.getLogger(UserServiceTest.class);
+	private static final Logger logger = Logger.getLogger(PriceServiceTest.class);
 	@Autowired
-	private UserService userService;
-	
+	private PriceService p;
 	@Test
-	public void deleteTest(){
-		User user = this.userService.getUser(1100);
-		this.userService.deleteUser(user);
+	public void getPrice(){
+	
+		logger.info(this.p.getPrice().getMaxprice());
 	}
 	
-	@Test
-	public void testSendEmail(){
-		User user = new User();
-		String vcode = VCodeUtils.Vcode(6);
-		user.setEmail("289458101@qq.com");
-		this.userService.sendEmail(user, vcode);
-		
-	}
+	
 	
 
 }
