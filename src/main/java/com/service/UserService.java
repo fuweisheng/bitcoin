@@ -26,9 +26,9 @@ public class UserService {
 	//同时要将邮箱验证码存入Validate中id是自动生成的
 	public boolean addUser(User user){
 		
-//		if(this.isExistedEmail(user.getEmail())){
-//			return false;
-//		}
+		if(this.isExistedEmail(user.getEmail())){
+			return false;
+		}
 		
 		Validate validate = new Validate();
 		String vcode = VCodeUtils.Vcode(6);
@@ -49,10 +49,15 @@ public class UserService {
 	}
 	
 	public boolean isExistedEmail(String email){
-		Integer id = this.userDao.getId(email);
-		if(id == null)
+		List<User> users = this.userDao.getUsers();
+		if(users == null)
 			return false;
-		return true;
+	
+		for(User u : users){
+			if(email.equalsIgnoreCase(u.getEmail()))
+				return true;
+		}
+		return false;
 	}
 	
 	public void sendEmail(User user,String vcode){
