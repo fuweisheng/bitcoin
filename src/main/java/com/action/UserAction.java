@@ -1,5 +1,7 @@
 package com.action;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
@@ -9,8 +11,10 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.entity.Price;
 import com.entity.User;
 import com.opensymphony.xwork2.ActionSupport;
+import com.service.PriceService;
 import com.service.UserService;
 import com.utils.RandomValidateCode;
 
@@ -31,6 +35,8 @@ public class UserAction extends ActionSupport {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private PriceService priceService;
 
 	// 注册的Action
 	@Action(value = "register", results = {
@@ -96,13 +102,33 @@ public class UserAction extends ActionSupport {
 		return "fail";
 	}
 	
-	// 登录的Action
-	@Action(value = "logout", results = {@Result(name = "success", type = "redirect", location = "/user/login.jsp")})
+	// 退出的Action
+	@Action(value = "logout", results = {@Result(name = "success", type = "redirect", location = "/common/index.jsp")})
 	public String logout() throws Exception {
 		this.userService.logout();
 		return SUCCESS;
 	}
-
+	
+	//进入读取bitcoin价格
+	@Action(value = "getBitcoinInfo")
+	public void getBitcoinInfo() throws Exception {
+		
+		Price price = this.priceService.getPrice();
+		StringBuffer buf= new StringBuffer();
+		buf.append("比特币价格    ")
+			.append("最高价格：")
+			.append(price.getMaxprice())
+			.append("   ")
+			.append("最低价格：")
+			.append(price.getMinprice())
+			.append("   ")
+			.append("当前价格")
+			.append(price.getPrice())
+			.append("   ");
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/plain;charset=UTF-8");
+		response.getWriter().write(buf.toString());
+	}
 
 	public User getUser() {
 		return user;

@@ -38,17 +38,16 @@ z-index: 2;
 </style>
 </head>
 <body>
-	<div class="navbar navbar-inverse" ><p class="navbar-text navbar-left"><span style="font-size: 18px;">YUN - Cloud Coin</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/bitcoin/user/login.jsp" class="navbar-link">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="navbar-link">Wallet</a>&nbsp;&nbsp;&nbsp;&nbsp;Stats&nbsp;&nbsp;&nbsp;&nbsp;API&nbsp;&nbsp;&nbsp;&nbsp;矿机</p>
+	<div class="navbar navbar-inverse" ><p class="navbar-text navbar-left"><span style="font-size: 18px;">YUN - Cloud Coin</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/bitcoin/user/login.jsp" class="navbar-link">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/bitcoin/wallet/walletpage" class="navbar-link">Wallet</a>&nbsp;&nbsp;&nbsp;&nbsp;Stats&nbsp;&nbsp;&nbsp;&nbsp;API&nbsp;&nbsp;&nbsp;&nbsp;矿机</p>
 	<p class="navbar-text navbar-right" style="margin-right: 20px;">Signed in as <span id="id_emailName"></span> <a href="/bitcoin/user/logout" class="navbar-link">logout</a></p></div>
 
 	<div class="banner row" style="margin-top:-20px; ">
-		<span id="id_pre"><a href="#" class="unslider-arrow prev">Previous slide</a></span>
-		<span id="id_next"><a href="#" class="unslider-arrow next">Next slide</a></span>
+		<span id="id_pre"><a href="#" class="unslider-arrow prev"><img alt="l" style="width:22px;height:33px;" src="../images/l.png"></a></span>
+		<span id="id_next"><a href="#" class="unslider-arrow next"><img alt="r" style="width:22px;height:33px;" src="../images/r.png"></a></span>
 		<ul class="col-md-12">
 			<li><img alt="" src="../images/1.jpg"></li>
 			<li><img alt="" src="../images/2.jpg"></li>
 			<li><img alt="" src="../images/3.jpg"></li>
-			<li><img alt="" src="../images/4.jpg"></li>
 		</ul>
 	</div>
 	
