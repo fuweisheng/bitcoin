@@ -7,33 +7,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 新 Bootstrap 核心 CSS 文件 -->
-<link rel="stylesheet"
-	href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 
-<!-- logo -->
+	<!-- logo -->
 	<link rel="shortcut icon" href="../images/logo.ico" type="image/x-icon" />
-
-<title>登录</title>
+	<title>登录</title>
 </head>
-<script type="text/javascript">
-var inputs=document.getElementsByTagName("input");
-function judge(n,s){
-	if(inputs.item(n).value.length<=0){
-		alert(s);
-	}
-	if("${tip}"!=""){
-		//alert("${tip}");
-	}
-	
-}
-</script>
+
 <body>
 	<jsp:include page="../common/head.jsp" />
-	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-	<script
-		src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	
 	<div class="row">
 		<div class="col-xs-6 col-md-5 col-md-offset-1">
 			<div class="row">
@@ -128,5 +111,39 @@ function judge(n,s){
 	</div>
 
 
+<div id="id_myModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">操作提示</h4>
+      </div>
+      <div class="modal-body">
+        <p id="id_hint"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+if("${tip}"!=""){
+	$("#id_hint").html("${tip}请确认&hellip;");
+	$("#id_myModal").modal();
+}
+var inputs=document.getElementsByTagName("input");
+function judge(n,s){
+	if(inputs.item(n).value.length<=0){
+		alert(s);
+	}
+}
+</script>
 </body>
 </html>

@@ -27,8 +27,8 @@ public class PageDao<T, PK extends Serializable> extends BaseDao<T, PK> {
 		list = this.find(hql, start, PageDao.PER_PAGE_NUM);
 		this.setPage(page, start, totalNum);
 		
-		System.out.println("输出："+hql);  //测试的时候用的
-		System.out.println(start+"    "+totalNum);   //测试的时候用的
+//		System.out.println("输出："+hql);  //测试的时候用的
+//		System.out.println(start+"    "+totalNum);   //测试的时候用的
 		return list;
 	}
 	

@@ -77,11 +77,33 @@
 	</div>
 	
 	
+<div id="id_myModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">操作提示</h4>
+      </div>
+      <div class="modal-body">
+        <p id="id_hint"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+	
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+
+if("${tip}"!=""){
+	$("#id_hint").html("${tip}请确认&hellip;");
+	$("#id_myModal").modal();
+}
+
 $("#id_check").click(function (){
 	if($("#id_name").val()==""){
 		alert("用户名不能为空");
@@ -93,10 +115,6 @@ $("#id_check").click(function (){
 	}
 	$("#id_checkForm").submit();
 });
-
-if("${tip}"!=""){
-	
-}
 
 </script>	
 	

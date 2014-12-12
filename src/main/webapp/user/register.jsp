@@ -20,11 +20,103 @@
 }
 </style>
 </head>
+
+
+<body>
+	<jsp:include page="../common/head.jsp" />
+
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class=" col-md-6" style="min-width: 500px;">
+			<h3>Create A New Wallet.</h3>
+			<br>
+			<h4>Please choose an alias and password for the new wallet.</h4>
+			<br>
+			<form action="/bitcoin/user/register" method="post" class="form-horizontal" role="form" name="reg_form" >
+
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">Email:</label>
+					<div class="col-sm-10">
+						<input name="user.email" type="email" style="width: 400px;" 
+							class="form-control" id="inputEmail3" placeholder="Email"
+							onblur="islegaldate(this.name)"><span class="text_email"></span>
+					</div>
+				</div>
+
+				<div style="margin-left: 100px;">(Optional)-We will email you
+					a link to your new wallet.</div>
+				<br>
+
+
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-2 control-label">Password:</label>
+					<div class="col-sm-10">
+						<input name="user.password" type="password" style="width: 400px;"
+							class="form-control" id="inputPassword3" placeholder="Password" onblur="islegaldate(this.name)" />
+							<span class="text_pas"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-2 control-label">Confirm
+						Password:</label>
+					<div class="col-sm-10">
+						<input name="upsw2" type="password" style="width: 400px;"
+							class="form-control" id="inputPassword3"
+							placeholder="Confirm Password" onblur="islegaldate(this.name)" /><span
+							class="text_pas2">.</span>
+					</div>
+				</div>
+
+				<div class="col-sm-offset-2 clo-sm-10"><a href="#"><img alt="VCode" src="../images/vcode.jpg" onclick="this.src='../images/vcode.jpg?'+new Date().getTime()"/></a></div><br/>
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-2 control-label">Captcha:</label>
+					<div class="col-sm-10">
+						<input name="captcha" type="text" style="width: 400px;" class="form-control"
+							id="inputPassword3" placeholder="Captcha"><span class="text_tip"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="button" class="btn btn-primary"
+							onClick="submitForm()">Continue</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-md-4">
+		<br/><br/><br/><br/><br/><br/><br/>
+		<img class="img-responsive img-rounded" alt="图片7" src="../images/7.jpg" />
+		</div>
+	</div>
+
+
+<div id="id_myModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">操作提示</h4>
+      </div>
+      <div class="modal-body">
+        <p id="id_hint"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+
+	if("${tip}"!=""){
+		$("#id_hint").html("${tip}请确认&hellip;");
+		$("#id_myModal").modal();
+	}
 	//检验邮箱是否填写正确
 	function checkmail(arg_1) {
 		//alert("hello2");
@@ -120,78 +212,7 @@
 		}
 	}
 	
-	//这总处理方法不好
-	if("${tip}"=="验证码错误"){
-		//alert("${tip}");
-	}
+
 </script>
-
-<body>
-	<jsp:include page="../common/head.jsp" />
-
-	<div class="row">
-		<div class="col-md-2"></div>
-		<div class=" col-md-6" style="min-width: 500px;">
-			<h3>Create A New Wallet.</h3>
-			<br>
-			<h4>Please choose an alias and password for the new wallet.</h4>
-			<br>
-			<form action="/bitcoin/user/register" method="post" class="form-horizontal" role="form" name="reg_form" >
-
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">Email:</label>
-					<div class="col-sm-10">
-						<input name="user.email" type="email" style="width: 400px;" 
-							class="form-control" id="inputEmail3" placeholder="Email"
-							onblur="islegaldate(this.name)"><span class="text_email"></span>
-					</div>
-				</div>
-
-				<div style="margin-left: 100px;">(Optional)-We will email you
-					a link to your new wallet.</div>
-				<br>
-
-
-				<div class="form-group">
-					<label for="inputPassword3" class="col-sm-2 control-label">Password:</label>
-					<div class="col-sm-10">
-						<input name="user.password" type="password" style="width: 400px;"
-							class="form-control" id="inputPassword3" placeholder="Password" onblur="islegaldate(this.name)" />
-							<span class="text_pas"></span>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputPassword3" class="col-sm-2 control-label">Confirm
-						Password:</label>
-					<div class="col-sm-10">
-						<input name="upsw2" type="password" style="width: 400px;"
-							class="form-control" id="inputPassword3"
-							placeholder="Confirm Password" onblur="islegaldate(this.name)" /><span
-							class="text_pas2">.</span>
-					</div>
-				</div>
-
-				<div class="col-sm-offset-2 clo-sm-10"><a href="#"><img alt="VCode" src="../images/vcode.jpg" onclick="this.src='../images/vcode.jpg?'+new Date().getTime()"/></a></div><br/>
-				<div class="form-group">
-					<label for="inputPassword3" class="col-sm-2 control-label">Captcha:</label>
-					<div class="col-sm-10">
-						<input name="captcha" type="text" style="width: 400px;" class="form-control"
-							id="inputPassword3" placeholder="Captcha"><span class="text_tip"></span>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="button" class="btn btn-primary"
-							onClick="submitForm()">Continue</button>
-					</div>
-				</div>
-			</form>
-		</div>
-		<div class="col-md-4">
-		<br/><br/><br/><br/><br/><br/><br/>
-		<img class="img-responsive img-rounded" alt="图片7" src="../images/7.jpg" />
-		</div>
-	</div>
-
 </body>
 </html>

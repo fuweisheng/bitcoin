@@ -13,7 +13,7 @@
 
 window.setTimeout("getPriceInfo()", 100);
 
-if("${email}"!=""){
+if("${sessionScope.email}"!=""){
 	document.getElementById("id_emailName").innerHTML="${email}";
 }
 function getPriceInfo(){
